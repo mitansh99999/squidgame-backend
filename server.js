@@ -26,6 +26,11 @@ db.once('open', () => {
 // Routes
 app.use('/api/comments', commentRoutes);
 
+// Root route
+app.get('/', (req, res) => {
+  res.send('Welcome to the Comment API!');
+});
+
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

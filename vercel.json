@@ -1,15 +1,9 @@
 {
-  "version": 1,
+  "version": 2,
   "builds": [
     {
-      "src": "server.js",  // Entry point for your app
-      "use": "@vercel/node"  // Use the Vercel Node.js builder
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
+      "src": "server.js",  
+      "use": "@vercel/node"
     }
   ]
 }

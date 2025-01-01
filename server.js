@@ -1,8 +1,12 @@
+require('dotenv').config();
+
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const commentRoutes = require('./routes/comments');
+const seriesRoutes = require('./routes/series');
+const authRoutes = require('./routes/auth');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -25,12 +29,31 @@ db.once('open', () => {
 
 // Routes
 app.use('/api/comments', commentRoutes);
+app.use('/api/series', seriesRoutes);
+app.use('/api/auth', authRoutes)
 
 // Root route
 app.get('/', (req, res) => {
-  res.send('Welcome to the Comment API!');
+  res.send('Welcome to the API!');
 });
-
+app.get('/api/series', async (req, res) => {
+  try {
+    const series = await Series.find(); // Assuming you're using MongoDB
+    res.status(200).json(series);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server Error');
+  }
+});
+app.get('/api/series', async (req, res) => {
+  try {
+    const series = await Series.find(); // Assuming you're using MongoDB
+    res.status(200).json(series);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server Error');
+  }
+});
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
